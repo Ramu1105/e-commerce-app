@@ -3,8 +3,8 @@ package org.jsp.ecommerceapp.controller;
 import java.util.List;
 
 import org.jsp.ecommerceapp.dto.ResponseStructure;
-import org.jsp.ecommerceapp.model.Merchant;
-import org.jsp.ecommerceapp.service.MerchantService;
+import org.jsp.ecommerceapp.model.User;
+import org.jsp.ecommerceapp.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,46 +22,46 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @CrossOrigin
-@RequestMapping(value="/merchants")
-public class MerchantController {
+@RequestMapping(value="/users")
+public class UserController {
 	@Autowired
-	private MerchantService merchantService;
+	private UserService userService;
 
 	@PostMapping
 	@ResponseStatus(code = HttpStatus.CREATED)
-	public ResponseStructure<Merchant> saveMerchant(@RequestBody Merchant merchant) {
-		return merchantService.saveMerchant(merchant);
+	public ResponseStructure<User> saveUser(@RequestBody User user) {
+		return userService.saveUser(user);
 	}
 	
 	@PutMapping
-	public ResponseEntity<ResponseStructure<Merchant>> updateMerchant(@RequestBody Merchant merchant) {
-		return merchantService.updateMerchant(merchant);
+	public ResponseEntity<ResponseStructure<User>> updateUser(@RequestBody User user) {
+		return userService.updateUser(user);
 	}
 
 	@GetMapping(value = "/{id}")
-	public ResponseEntity<ResponseStructure<Merchant>> findById(@PathVariable(name = "id") int id) {
-		return merchantService.findById(id);
+	public ResponseEntity<ResponseStructure<User>> findById(@PathVariable(name = "id") int id) {
+		return userService.findById(id);
 	}
 
 	@DeleteMapping(value = "/{id}")
 	public ResponseEntity<ResponseStructure<String>> deleteById(@PathVariable(name = "id") int id) {
-		return merchantService.deleteById(id);
+		return userService.deleteById(id);
 	}
 
 	@GetMapping
 	@ResponseStatus(code = HttpStatus.OK)
-	public ResponseStructure<List<Merchant>> findAll() {
-		return merchantService.findAll();
+	public ResponseStructure<List<User>> findAll() {
+		return userService.findAll();
 	}
 
 	@PostMapping("/verify-by-phone")
-	public ResponseEntity<ResponseStructure<Merchant>> verifyMerchant(@RequestParam long phone,
+	public ResponseEntity<ResponseStructure<User>> verifyUser(@RequestParam long phone,
 			@RequestParam String password) {
-		return merchantService.verifyMerchant(phone, password);
+		return userService.verifyUser(phone, password);
 	}
 
 	@GetMapping("/find-by-name/{name}")
-	public ResponseEntity<ResponseStructure<List<Merchant>>> findByName(@PathVariable String name) {
-		return merchantService.findByName(name);
+	public ResponseEntity<ResponseStructure<List<User>>> findByName(@PathVariable String name) {
+		return userService.findByName(name);
 	}
 }
